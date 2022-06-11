@@ -27,7 +27,7 @@ Reload profile due to changes made by previous step:
 #### 1.2 Get vehicle build
 > Please [check](https://github.com/ArduPilot/ardupilot/tags) which vehicle-build version suits you the best
 ```
-git checkout Copter-${version}
+git checkout Copter-<VERSION_OF_YOUR_CHOICE>
 git submodule update --init --recursive
 ```
 
@@ -45,13 +45,13 @@ make sitl-params
 Gazebo is installed using the package manager of your distro, I kindly ask you to refer to their [official documentation](https://osrf.github.io/gazebo-doc-index/categories/installing_gazebo.html).
 
 #### 2.2 Install Ardupilot plugin for Gazebo
-
+```
 git clone https://github.com/khancyr/ardupilot_gazebo.git
 cd ardupilot_gazebo
 cmake ..
 make -j4
 sudo make install
-
+```
 Make sure `/usr/share/gazebo/setup.sh` is sourced on every shell.
 
 > `ardupilot_gazebo/models` are outdated. You could create custom Gazebo models for yourself or you keep reading becouse we will come back to this issue.
