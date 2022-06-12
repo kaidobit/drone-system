@@ -42,6 +42,9 @@ make sitl-params
 
 
 #### 2.1 Gazebo installation
+
+> Make sure to install desktop full version.
+
 Gazebo is installed using the package manager of your distro, I kindly ask you to refer to their [official documentation](https://osrf.github.io/gazebo-doc-index/categories/installing_gazebo.html).
 
 #### 2.2 Install Ardupilot plugin for Gazebo
@@ -151,3 +154,4 @@ and watch your drone take off to 10 meters height in Gazebo.
 - [Mavlink](https://mavlink.io/en/)
 - [Mavros](http://wiki.ros.org/mavros)
 - [Catkin](https://github.com/ros/catkin)
+- [3rd party Gazebo Models](https://github.com/Intelligent-Quads/iq_sim)
