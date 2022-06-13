@@ -59,6 +59,9 @@ class Drone:
     def __init__(self):
         pass
     
+    def connect(self, connection_string: str = "127.0.0.1:14550"):
+        pass
+
     def switch_mode(self, flightmode: Flightmode = Flightmode.STABILIZE):
         pass
 
