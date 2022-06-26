@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  greengrass-core:
+    image: amazon/aws-iot-greengrass:2.5.3-0
+    ports:
+      - "8883:8883"
+    environment:
+      - AWS_REGION=$DEPLOYMENT_REGION
+      - GGC_ROOT_PATH=/greengrass/v2
+      - PROVISION=$GREENGRASS_CORE_PROVISION
+      - THING_NAME=$GREENGRASS_CORE_THING_NAME
+      - THING_GROUP_NAME=DevGroup
+      - TES_ROLE_NAME=$GREENGRASS_PROVISION_ROLE
+      - TES_ROLE_ALIAS_NAME=$GREENGRASS_PROVISION_ROLE_ALIAS
+      - COMPONENT_DEFAULT_USER=ggc_user:ggc_group
+    volumes:
+      - ${PWD}/volumes/greengrass-core:/root/.aws/:ro
+      - greengrass-core-certs:/greengrass/certs
+      - greengrass-core-config:/greengrass/config
+    entrypoint: /greengrass-entrypoint.sh
+
+volumes:
+  greengrass-core-certs:
+  greengrass-core-config:
