@@ -1,0 +1,5 @@
+.DS_Store                # Cruft from MacOS Finder
+Thumbs.db                # Cruft from Windows Explorer
+
+.idea/                   # IntelliJ IDEA (Illuminated Cloud)
+.vscode/                 # Visual Studio Code
