@@ -8,15 +8,16 @@ TBD...
 
 ## Project
 
-1. Provision the Infrastructure:
+1. Optionally configure the .envrc.
+2. Provision the Infrastructure:
    ```
    aws-vault exec <YOUR_PROFILENAME> -- terraform apply
    ```
 confirm by entering yes.
 
-2. Add your IAM user to the `$PROJECTNAME-developer` group created by step 1.
+3. Add your IAM user to the `$PROJECTNAME-developer` group created by step 1.
 
-3. Provision your Greengrass-Core device:
+4. Provision your Greengrass-Core device:
    1. Get the Role ARN for the Greengrass Provisioning Role:
       ```
       aws-vault exec <YOUR_PROFILENAME> -- make gg-role-arn

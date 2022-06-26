@@ -33,7 +33,7 @@ git submodule update --init --recursive
 
 Run SITL (Software In The Loop) once to set params:
 ```
-make sitl-params
+make vehicle
 ```
 
 ### 2. Install Gazebo for Ardupilot
@@ -43,7 +43,7 @@ make sitl-params
 
 #### 2.1 Gazebo installation
 
-> Make sure to install desktop full version.
+> Make sure to install the development package with the appropriate version as well.
 
 Gazebo is installed using the package manager of your distro, I kindly ask you to refer to their [official documentation](https://osrf.github.io/gazebo-doc-index/categories/installing_gazebo.html).
 
@@ -51,6 +51,8 @@ Gazebo is installed using the package manager of your distro, I kindly ask you t
 ```
 git clone https://github.com/khancyr/ardupilot_gazebo.git
 cd ardupilot_gazebo
+mkdir build
+cd build
 cmake ..
 make -j4
 sudo make install
@@ -67,7 +69,11 @@ anyway permanently.
 
 ### 3. Install ROS
 
-> ROS or Robot Operating System is a framework for industrial robotik applications. We will use it in order to control a drone over Mavlink using a ground station. For this specific purpose the creators of ROS published Mavros, which is basically what we're dealing with.
+> ROS or Robot Operating System is a framework for industrial robotik applications.
+> We will use it in order to control a drone over Mavlink using a ground station.
+> For this specific purpose the creators of ROS published Mavros,
+> which is basically what we're dealing with.
+> Make sure to install the 'desktop-full'-version.
 
 #### 3.1 ROS
 This is distro specific please refer to the [official documentation](http://wiki.ros.org/Installation)
@@ -79,7 +85,7 @@ This is distro specific please refer to the [official documentation](http://wiki
 Install `pip3` and then install python packages>:
 
 ```
-pip3 install osrf-pycommon, wstool, rosinstall-generator, catkin-lint, catkin-tools
+pip3 install osrf-pycommon wstool rosinstall-generator catkin-lint catkin-tools
 ```
 
 Then, initialize the catkin workspace:
@@ -99,6 +105,8 @@ rosinstall_generator --upstream mavros | tee /tmp/mavros.rosinstall
 rosinstall_generator mavlink | tee -a /tmp/mavros.rosinstall
 wstool merge -t src /tmp/mavros.rosinstall
 wstool update -t src
+sudo apt install python3-rosdep2 # or your package manager
+add '/usr/bin/rosdep' to $PATH permanently
 rosdep install --from-paths src --ignore-src --rosdistro `echo $ROS_DISTRO` -y
 catkin build
 ```
@@ -133,7 +141,7 @@ Create a new shell and start Gazebo and SITL.
 
 Gazebo:
 ```
-make launch
+make world
 ```
 open a second shell and start SITL:
 ```
