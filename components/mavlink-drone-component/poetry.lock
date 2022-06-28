@@ -1,17 +1,28 @@
 [[package]]
-name = "AWSIoTPythonSDK"
-version = "1.4.9"
-description = "SDK for connecting to AWS IoT using Python."
+name = "awscrt"
+version = "0.13.13"
+description = "A common runtime for AWS Python projects"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.6"
+
+[[package]]
+name = "awsiotsdk"
+version = "1.0.0.dev0"
+description = "AWS IoT SDK based on the AWS Common Runtime"
+category = "main"
+optional = false
+python-versions = ">=3.6"
 develop = false
+
+[package.dependencies]
+awscrt = "0.13.13"
 
 [package.source]
 type = "git"
-url = "https://github.com/aws/aws-iot-device-sdk-python.git"
-reference = "master"
-resolved_reference = "f3521d104bd30e41ea88aef9a2a683146a22d044"
+url = "https://github.com/aws/aws-iot-device-sdk-python-v2.git"
+reference = "main"
+resolved_reference = "17bb44d1a142f323ef03f59ba697d01906907c48"
 
 [[package]]
 name = "dronekit"
@@ -77,10 +88,46 @@ lxml = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "8a11d5427dd3a586478eb26c42b8b20d4aa5108752f5285fc1e7e76e4ae1bbbd"
+content-hash = "15e71922d799474f8901fb1be217d0e501ce73280eea53bed7c8481569741fab"
 
 [metadata.files]
-AWSIoTPythonSDK = []
+awscrt = [
+    {file = "awscrt-0.13.13-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:7a224550ea9e04bed2dd2ddcf4ac4c5dfa73c95f5e9aba999514bfa3872966aa"},
+    {file = "awscrt-0.13.13-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f5d6b34e49b08ed29792d9bf352739a2895dbe360d6add3dcfde29bafab03ae1"},
+    {file = "awscrt-0.13.13-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3f683200d047fcae1461736b96513562029afc0935d37e7ef8c9c2600494c801"},
+    {file = "awscrt-0.13.13-cp310-cp310-win32.whl", hash = "sha256:d84a6bf04d88c88482250ba232ac8babbe171480d77d92da973e9d49c9d3fc89"},
+    {file = "awscrt-0.13.13-cp310-cp310-win_amd64.whl", hash = "sha256:1958c6dfc485585cce1917e8db35fe018c53b36b777aa952af2df0d340064182"},
+    {file = "awscrt-0.13.13-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:7703b87e18a0a70e354cea5e3e7b46411de87962feb8692f5fb877bb652a2e82"},
+    {file = "awscrt-0.13.13-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:14cf26d83ba6192efca9648cf14757d5d75019d0171414f4ad2742881d6e2935"},
+    {file = "awscrt-0.13.13-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5a6904b6f791374a5807bc2cc39a773864c638d58f522f9288693e1822d8ebcd"},
+    {file = "awscrt-0.13.13-cp36-cp36m-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:9fcd1666ef1c36d61106ca05c641c49fe9fde24ca1f02b74046444ee58c70fb5"},
+    {file = "awscrt-0.13.13-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:4f21ffa4f8beca233f010a8a9f4e7bba9a7f2bd7aef1ea3dff1f364989b0867b"},
+    {file = "awscrt-0.13.13-cp36-cp36m-win32.whl", hash = "sha256:cf644e217c144ee3605c398d2d5327a781b7cf8c9802a73f337f24f180141646"},
+    {file = "awscrt-0.13.13-cp36-cp36m-win_amd64.whl", hash = "sha256:c48c5478fc6a382c12eadc811f7da07289e40a3338e2c303e0414c996d612e17"},
+    {file = "awscrt-0.13.13-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:27519c103015d20754d4e0be7773844cdb50fbd9d3cac05826f888e6c6d24b9c"},
+    {file = "awscrt-0.13.13-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:aa24c53a491f9619da6c0338ccdaec1bcd83cd9a24743981940b0b367a33b5e5"},
+    {file = "awscrt-0.13.13-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a2f4141461e905368409b69b0e7829bfa6f7680154451638fac192f418b3429f"},
+    {file = "awscrt-0.13.13-cp37-cp37m-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:7efd9807b8cea29409a41980857ca1d86e2070d071b43049770641994875a606"},
+    {file = "awscrt-0.13.13-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:5753bb4dffc1c40d8156a9314d823846a19c2de87e0dcfb3e2001f8f5c8be02e"},
+    {file = "awscrt-0.13.13-cp37-cp37m-win32.whl", hash = "sha256:72a454a49f8a487c3b2c8c8f9da553d908f80202a30444be824ebe07a8c75304"},
+    {file = "awscrt-0.13.13-cp37-cp37m-win_amd64.whl", hash = "sha256:8b4cf33844ff2fbf8c04c3606dd1a0eeed1ee526dadbc5b3e3ed41839875444f"},
+    {file = "awscrt-0.13.13-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:def24b8945951351c0a9216fcc9ddc23deefdeb645bbe117319e98643bc97a97"},
+    {file = "awscrt-0.13.13-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ec436a633600b92f744696a78675f7cbb621b12ae9dedf3cd56af840d1970b8b"},
+    {file = "awscrt-0.13.13-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c490b49103619a144e0cc4925170255c085d366ab687fb685c04ef1f74e0dda6"},
+    {file = "awscrt-0.13.13-cp38-cp38-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:4833d4e2cfa2785696015582b3fba2a5cd774c9a6657d11833f0ae0fc29b5e41"},
+    {file = "awscrt-0.13.13-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:e042c9c71afc2c3c1079fe1ba52ea11a93fe0c68b183266a58e7faffd1e01b36"},
+    {file = "awscrt-0.13.13-cp38-cp38-win32.whl", hash = "sha256:a96b1df3369b3ed0f2b794650028cd42ff14630d0e2aea866c24747bd034c5ea"},
+    {file = "awscrt-0.13.13-cp38-cp38-win_amd64.whl", hash = "sha256:4c14a8522c84bf7f5e755bb31dcb286c1e8a44ed4cbadee29396567bc08c3b90"},
+    {file = "awscrt-0.13.13-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:6d20479f0cd2ccc0b60d7c87f8ba82fb4c71934af04c7ad8a281c46a492f2424"},
+    {file = "awscrt-0.13.13-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:452a74258474433cc1543ba5fd63cce32192c54f395c66bb2b3aa0f47232f943"},
+    {file = "awscrt-0.13.13-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:19c175e000656ccf76cfdb54a3223602a3f9b2b374a719eb48f8dc8fcee3d127"},
+    {file = "awscrt-0.13.13-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:d3b9da3e8a6f025a44756f393506c742e92037fee4c28f31d8a68e383456205c"},
+    {file = "awscrt-0.13.13-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:b20ae82edc72526fa5eb605d50e6b925d515f2fee34c338762169f1eb242f704"},
+    {file = "awscrt-0.13.13-cp39-cp39-win32.whl", hash = "sha256:ec7b76b33c0ac837e38aeade5d51534ef9b0f91a13c59574dbab40a5941a0a7f"},
+    {file = "awscrt-0.13.13-cp39-cp39-win_amd64.whl", hash = "sha256:2c98f433b433ecc5c4cd5dfe8aee51bbb592a616294cdaada63cc1c1de476a61"},
+    {file = "awscrt-0.13.13.tar.gz", hash = "sha256:e240a7e6dc9db79e8bdb652f590be12dc2d5af7d541fea0c7dd8e1b4bf54fde2"},
+]
+awsiotsdk = []
 dronekit = []
 future = [
     {file = "future-0.18.2.tar.gz", hash = "sha256:b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"},
