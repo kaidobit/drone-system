@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "artifact_bucket_policy" {
 
     principals {
       type = "AWS"
-      identifiers = [aws_iam_role.greengrass_v2_token_exchange_role.arn]
+      identifiers = [aws_iam_role.greengrass_provision_role.arn]
     }
   }
 }

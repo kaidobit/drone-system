@@ -14,3 +14,6 @@ assume-role:
 	aws sts assume-role \
     	  --role-arn ${ARN} \
     	  --role-session-name ${GREENGRASS_SESSION_NAME}
+
+gg-logs:
+	docker-compose exec greengrass-core tail -f /greengrass/v2/logs/greengrass.log

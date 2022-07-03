@@ -1,4 +1,17 @@
-# Provision Role is always beeing created when provisioning a docker-core, even tho its managed by terraform and exists?! 
+# terraform
+## erstelle iot device group 'development-device'
+## erstelle components
+### .envrc pro component mit, die $VERSION exportiert
+### $VERSION in recipe.yaml verwenden
+### $VERSION in terraform für deployment anpassen 
+## deployment nucleus, cli, localdebug, alle components auf device group
+
+# custom core-device-docker-image
+## aws-creds als envs
+## zusätzliche portweiterleitung für debug webui
+## log von greengrass
+
+# dockerize sim_vehicle.py
 
 # Provision real world core devices 
 ## Store Access Key and Secret of Greengrass-Provision-User in AWS parameter store using terraform
