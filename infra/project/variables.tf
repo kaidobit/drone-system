@@ -29,21 +29,3 @@ variable "s3_destroy_artifact_origin" {
   default     = false
   description = "When destroying this Stack should the contents of the artifact bucket be deleted before the bucket is being destroyed."
 }
-
-variable "cloudfront_artifact_distribution_aliases" {
-  type        = list(string)
-  default     = []
-  description = "Custom domain names for "
-}
-
-variable "cloudfront_enable_artifact_distribution" {
-  type        = bool
-  default     = false
-  description = "Enable/Disable Cloudfront artifact distribution, in order to save some money. This is where devices get their components. (can be enabled manually)"
-}
-
-variable "cloudfront_retain_artifact_distribution_on_destroy" {
-  type        = bool
-  default     = true
-  description = "Disable or Destroy Cloudfront artifact Distribution when this stack is being destroyed."
-}
