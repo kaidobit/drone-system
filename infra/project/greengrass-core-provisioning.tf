@@ -90,6 +90,8 @@ resource "aws_iam_access_key" "greengrass_user_access_key" {
 resource "aws_iam_role" "greengrass_v2_token_exchange_role" {
   name = var.greengrass_v2_token_exchange_role_name
   assume_role_policy = data.aws_iam_policy_document.assume_greengrass_v2_token_exchange_role_policy.json
+
+  # TODO change to customer managed policy so first provisioning process doesnt create it
   inline_policy {
     name   = var.greengrass_v2_token_exchange_policy_name
     policy = data.aws_iam_policy_document.greengrass_v2_token_exchange_policy.json
