@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "mavlink-drone-component"
+name = "mavlink-component"
 version = "0.1.0"
 description = ""
-authors = ["kaidobit"]
+authors = ["Patrick Shaikh <patrick.shaikh@mayflower.de>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -10,6 +10,7 @@ dronekit = {git = "https://github.com/dronekit/dronekit-python.git"}
 awsiotsdk = {git = "https://github.com/aws/aws-iot-device-sdk-python-v2.git", rev = "main"}
 
 [tool.poetry.dev-dependencies]
+pytest = "^5.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
