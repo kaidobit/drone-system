@@ -21,3 +21,11 @@ variable "greengrass_provision_role_alias" {
 variable "s3_destroy_artifact_origin" {
   type = bool
 }
+
+variable "iot_thing_policy_name" {
+  type = string
+}
+
+variable "iot_development_thing_group_name" {
+  type = string
+}

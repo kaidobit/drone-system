@@ -1,16 +1,19 @@
 version: '3.3'
 
 services:
-  greengrass-core:
+  companion-computer:
     image: amazon/aws-iot-greengrass:2.5.3-0
     ports:
       - "8883:8883"
+      - "1441:1441"
+      - "1442:1442"
     environment:
       - AWS_REGION=$DEPLOYMENT_REGION
       - GGC_ROOT_PATH=/greengrass/v2
       - PROVISION=$GREENGRASS_CORE_PROVISION
       - THING_NAME=$GREENGRASS_CORE_THING_NAME
-      - THING_GROUP_NAME=DevGroup
+      - THING_GROUP_NAME=$IOT_DEVELOPMENT_THING_GROUP_NAME
+      - THING_POLICY_NAME=$IOT_THING_POLICY_NAME
       - TES_ROLE_NAME=$GREENGRASS_PROVISION_ROLE_NAME
       - TES_ROLE_ALIAS_NAME=$GREENGRASS_PROVISION_ROLE_ALIAS
       - COMPONENT_DEFAULT_USER=ggc_user:ggc_group
