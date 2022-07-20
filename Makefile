@@ -5,13 +5,16 @@ first-sim:
 	cd $(ARDUPILOT_PATH)/${VEHICLE} && sim_vehicle.py -v ${VEHICLE} --console --map -c
 
 sim:
-	cd $(ARDUPILOT_PATH)/${VEHICLE} && sim_vehicle.py -v ${VEHICLE} --console --map -N #-f gazebo-iris
+	cd $(ARDUPILOT_PATH)/${VEHICLE} && sim_vehicle.py -v ${VEHICLE} --console --map -N
 
 gg-install:
 	sh ./bin/scripts/gg-install.sh
 
 gg-logs:
 	tail -f ./bin/greengrass/v2/logs/greengrass.log
+
+gg-pw:
+	greengrass-cli get-debug-password
 
 gg-uninstall:
 	rm -rf ./bin/greengrass/v2 && \
