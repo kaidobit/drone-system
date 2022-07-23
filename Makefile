@@ -14,7 +14,7 @@ gg-logs:
 	tail -f ./bin/greengrass/v2/logs/greengrass.log
 
 gg-pw:
-	greengrass-cli get-debug-password
+	./bin/greengrass/v2/bin/greengrass-cli get-debug-password
 
 gg-uninstall:
 	rm -rf ./bin/greengrass/v2 && \
