@@ -1,0 +1,19 @@
+---
+RecipeFormatVersion: 2020-01-25
+ComponentName: io.shaikh.mavlink-component
+ComponentVersion: 1.0.0
+ComponentDescription: mavlink component
+ComponentPublisher: kaidobit
+Manifests:
+  - Platform:
+      os: linux
+    Lifecycle:
+      Install:
+        RequiresPrivilege: true
+        Script: python3 -m pip install -r {artifacts:decompressedPath}/mavlink-component/requirements.txt
+      Run:
+        RequiresPrivilege: true
+        Script: python3 {artifacts:decompressedPath}/mavlink-component/mavlink-component.py 127.0.0.1:14550
+    Artifacts:
+      - URI: s3://drone-system-artifact-origin/io.shaikh.mavlink-component/1.0.0/mavlink-component.zip
+        Unarchive: ZIP

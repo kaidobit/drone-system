@@ -2,6 +2,8 @@ from dronekit import connect as connect_vehicle, Vehicle, VehicleMode
 from time import sleep
 
 ALTITUDE_OFFSET = .95
+TOPIC = "drone/state"
+state = {}
 
 
 def connect(connectionstring: str) -> Vehicle:
@@ -11,66 +13,74 @@ def connect(connectionstring: str) -> Vehicle:
     print("Autopilot Version: %s", vehicle.version)
     while not vehicle.is_armable:
         sleep(1)
-    print("vehicle initialized...")
+    print("vehicle initialized")
 
     return vehicle
 
 
 def last_heartbeat_callback(self, attr_name, last_heartbeat):
-    message = {
+    state.update({
         "last_heartbeat": last_heartbeat
-    }
+    })
 
 
 def location_callback(self, attr_name, location):
-    message = {
-        "relative_alt": location.global_relative_frame.alt,
-        "absolute_alt": location.global_frame.alt,
-        "longitude": location.global_frame.lon,
-        "latitude": location.global_frame.lat
-    }
+    state.update({
+        "location": {
+            "relative_alt": location.global_relative_frame.alt,
+            "absolute_alt": location.global_frame.alt,
+            "longitude": location.global_frame.lon,
+            "latitude": location.global_frame.lat
+        }
+    })
 
 
 def attitude_callback(self, attr_name, attitude):
-    message = {
-        "pitch": attitude.pitch,
-        "yaw": attitude.yaw,
-        "roll": attitude.roll
-    }
+    state.update({
+        "attitude": {
+            "pitch": attitude.pitch,
+            "yaw": attitude.yaw,
+            "roll": attitude.roll
+        }
+    })
 
 
 def heading_callback(self, attr_name, heading):
-    message = {
+    state.update({
         "heading": heading
-    }
+    })
 
 
 def velocity_callback(self, attr_name, velocity):
-    message = {
-        "x": velocity[0],
-        "y": velocity[1],
-        "z": velocity[2]
-    }
+    state.update({
+        "velocity": {
+            "x": velocity[0],
+            "y": velocity[1],
+            "z": velocity[2]
+        }
+    })
 
 
 def airspeed_callback(self, attr_name, airspeed):
-    message = {
+    state.update({
         "air_speed": airspeed
-    }
+    })
 
 
 def groundspeed_callback(self, attr_name, groundspeed):
-    message = {
+    state.update({
         "ground_speed": groundspeed
-    }
+    })
 
 
 def battery_callback(self, attr_name, battery):
-    message = {
-        "voltage": battery.voltage,
-        "current": battery.current,
-        "level": battery.level
-    }
+    state.update({
+        "battery": {
+            "voltage": battery.voltage,
+            "current": battery.current,
+            "level": battery.level
+        }
+    })
 
 
 def attach_listeners(vehicle: Vehicle):
@@ -85,14 +95,14 @@ def attach_listeners(vehicle: Vehicle):
     sleep(1)
 
 
-def arm(vehicle):
+def arm(vehicle: Vehicle):
     vehicle.armed = True
     while not vehicle.armed:
         sleep(1)
     print("vehicle armed")
 
 
-def takeoff(vehicle, absolute_altitude: int = 10):
+def takeoff(vehicle: Vehicle, absolute_altitude: int = 10):
     vehicle.mode = VehicleMode("GUIDED")
     arm(vehicle)
     vehicle.simple_takeoff(absolute_altitude)
@@ -100,11 +110,44 @@ def takeoff(vehicle, absolute_altitude: int = 10):
         sleep(1)
 
 
-def do_drone_stuff(vehicle):
-    takeoff(vehicle)
+# def publish_state(ipc_client):
+#     from awsiot.greengrasscoreipc.model import (
+#         PublishToTopicRequest,
+#         PublishMessage,
+#         BinaryMessage
+#     )
+#     import json
+#
+#     print(state)
+#
+#     request = PublishToTopicRequest()
+#     request.topic = TOPIC
+#     publish_message = PublishMessage()
+#     publish_message.binary_message = BinaryMessage()
+#     publish_message.binary_message.message = json.dumps(state, indent=2).encode('utf-8')
+#     request.publish_message = publish_message
+#     operation = ipc_client.new_publish_to_topic()
+#     operation.activate(request)
+#     future = operation.get_response()
+#     future.result(1)
+
+
+def do_vehicle_stuff():
+    # import schedule
 
     while True:
+        # schedule.run_pending()
+        print("=================")
+        print(state)
         sleep(1)
+
+
+# def config_schduler(schedule_interval: int):
+#     import schedule
+#     import awsiot.greengrasscoreipc as ipc
+#
+#     ipc_client = ipc.connect()
+#     schedule.every(schedule_interval).seconds.do(publish_state(ipc_client))
 
 
 def main():
@@ -112,17 +155,24 @@ def main():
 
     parser = argparse.ArgumentParser(
         description='Mavlink to IPC connector.')
-    parser.add_argument('connectionstring',
+    parser.add_argument('connection_string',
                         type=str,
                         help="vehicle connection target string. default = 127.0.0.1:14550")
+    # parser.add_argument('--schedule_interval', '-s',
+    #                     default=1,
+    #                     required=False,
+    #                     type=int,
+    #                     help="Interval for publishing state to IPC")
     args = parser.parse_args()
 
-    connectionstring = args.connectionstring
+    connection_string = args.connection_string
+    # schedule_interval = args.schedule_interval
 
-    vehicle = connect(connectionstring)
+    vehicle = connect(connection_string)
     attach_listeners(vehicle)
+    # config_schduler(schedule_interval)
 
-    do_drone_stuff(vehicle)
+    do_vehicle_stuff()
 
 
 if __name__ == "__main__":

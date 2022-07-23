@@ -187,6 +187,14 @@ checkqa-mypy = ["mypy (==v0.761)"]
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xmlschema"]
 
 [[package]]
+name = "schedule"
+version = "1.1.0"
+description = "Job scheduling for humans."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "wcwidth"
 version = "0.2.5"
 description = "Measures the displayed width of unicode strings in a terminal"
@@ -197,7 +205,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "fd92ea48c8df05663957f898d359c565eafd1f423b04866f48a4c8ddab238ce0"
+content-hash = "6d5afd18c8e677e98580dfa7f8a49160be848cc96b318cb6f3d483ca81cee0c6"
 
 [metadata.files]
 atomicwrites = []
@@ -267,4 +275,5 @@ pyparsing = [
     {file = "pyparsing-3.0.9.tar.gz", hash = "sha256:2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb"},
 ]
 pytest = []
+schedule = []
 wcwidth = []
