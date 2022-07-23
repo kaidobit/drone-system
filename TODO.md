@@ -1,5 +1,4 @@
 # terraform
-## erstelle iot device group 'development-device'
 ## erstelle components
 ### .envrc pro component mit, die $VERSION exportiert
 ### $VERSION in recipe.yaml verwenden

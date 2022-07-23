@@ -23,8 +23,26 @@ data "aws_iam_policy_document" "assume_greengrass_provision_role_policy_document
       type =  "AWS"
       identifiers = [
         aws_iam_user.greengrass_user.arn
-        #aws_iam_group.developers.arn # TODO
       ]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "artifact_bucket_policy" {
+  statement {
+    sid = "2012-10-17"
+
+    actions = [
+      "s3:GetObject"
+    ]
+
+    resources = [
+      format("%s/*", module.artifact_bucket.s3_bucket_arn)
+    ]
+
+    principals {
+      type = "AWS"
+      identifiers = [aws_iam_role.greengrass_provision_role.arn]
     }
   }
 }
@@ -34,10 +52,6 @@ resource "aws_iam_user" "greengrass_user" {
   force_destroy        = var.iam_force_destroy_provision_user
 }
 
-resource "aws_iam_access_key" "greengrass_user_access_key" {
-  user = aws_iam_user.greengrass_user.name
-}
-
 resource "aws_iam_policy" "greengrass_provision_policy" {
   name        = var.greengrass_provision_policy_name
   description = "Greengrass V2 Token Exchange Policy."
@@ -45,13 +59,22 @@ resource "aws_iam_policy" "greengrass_provision_policy" {
   policy = data.aws_iam_policy_document.greengrass_provision_policy_document.json
 }
 
-resource "aws_iam_policy_attachment" "greengrass_provision_policy_attachment" {
-  name       = format("%sAttachment", var.greengrass_provision_policy_name)
-  roles      = [aws_iam_role.greengrass_provision_role.name]
-  policy_arn = aws_iam_policy.greengrass_provision_policy.arn
-}
-
 resource "aws_iam_role" "greengrass_provision_role" {
   name = var.greengrass_provision_role_name
   assume_role_policy = data.aws_iam_policy_document.assume_greengrass_provision_role_policy_document.json
+}
+
+module "artifact_bucket" {
+  source = "terraform-aws-modules/s3-bucket/aws"
+
+  bucket                   = format("%s-artifact-origin", var.projectname)
+  force_destroy            = var.s3_destroy_artifact_origin
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+
+  attach_policy           = true
+  policy                  = data.aws_iam_policy_document.artifact_bucket_policy.json
 }
